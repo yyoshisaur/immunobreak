@@ -45,6 +45,12 @@ windower.register_event('action', function(act)
     end
 end)
 
+windower.register_event('action message', function(actior_id, target_id, actior_index, target_index, message_id, param_1, param_2, param_3)
+    if died_message_id:contains(message_id) then
+        mobs[target_id] = {}
+    end
+end)
+
 windower.register_event('zone change', function()
     mobs = {}
 end)
