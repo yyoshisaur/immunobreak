@@ -1,5 +1,5 @@
 _addon.name = 'immunobreak'
-_addon.version = '0.0.0.1'
+_addon.version = '0.0.0.2'
 _addon.author = 'yyoshisaur'
 _addon.command = 'immunobreak'
 
@@ -31,8 +31,9 @@ windower.register_event('action', function(act)
         else
             mobs[target][effect] = 1 
         end
+        
         local spell_name = res.spells[spell].en
-        windower.add_to_chat(123, 'Immunobreak: '..spell_name..' ('..  mobs[target][effect]..') ---> '..mob_info.name)
+        windower.add_to_chat(5, 'Immunobreak: '..spell_name..' ('..  mobs[target][effect]..') ---> '..mob_info.name)
     elseif success_message_id:contains(act.targets[1].actions[1].message) then
         local target = act.targets[1].id
         local effect = act.targets[1].actions[1].param
@@ -40,6 +41,9 @@ windower.register_event('action', function(act)
         local actor = act.actor_id
 
         if mobs[target] and mobs[target][effect] then
+            local mob_info = windower.ffxi.get_mob_by_id(target)
+            local spell_name = res.spells[spell].en
+            windower.add_to_chat(7, 'Immunobreak: '..spell_name..' Success!! ---> '..mob_info.name)
             mobs[target][effect] = nil
         end
     end
